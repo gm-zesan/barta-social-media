@@ -62,6 +62,7 @@ php artisan serve
 
 
 ## Routes
+```bash
 GET    /register        -> Display the registration form
 POST   /register        -> Submit a new user registration
 GET    /login           -> Display the login form
@@ -71,3 +72,4 @@ GET   /profile          -> Show user profile
 GET   /profile/edit     -> Edit user profile
 PUT   /profile          -> Update user profile
 GET   /post-show        -> Show a single post
+```
