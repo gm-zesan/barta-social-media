@@ -24,6 +24,7 @@ Follow these steps to get the project running on your local machine:
 ```bash
 git clone https://github.com/gm-zesan/barta-social-media.git
 cd barta-social-media
+git checkout v-2
 ```
 
 ### 2. Install Dependencies
