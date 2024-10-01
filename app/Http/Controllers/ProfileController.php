@@ -11,8 +11,11 @@ class ProfileController extends Controller
 {
     
     public function show(Request $request){
+        $user = $request->user();
+        $posts = $user->posts()->latest()->get();
         return view('profile.show', [
-            'user' => $request->user(),
+            'user' => $user,
+            'posts' => $posts,
         ]);
     }
 

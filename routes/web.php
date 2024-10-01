@@ -22,6 +22,5 @@ Route::middleware('auth')->group(function () {
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    // single post route
-    Route::get('/post-show', [PostController::class, 'show'])->name('post.show');
+    Route::resource('posts', PostController::class)->except(['create', 'edit']);
 });
