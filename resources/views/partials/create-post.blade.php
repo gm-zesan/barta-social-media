@@ -14,15 +14,21 @@
                     name="content" rows="2" placeholder="What's going on, {{ $user->name }}?"></textarea>
             </div>
         </div>
+        <div id="previewContainer" class="relative hidden">
+            <img id="imagePreview" class="min-h-auto w-full rounded-lg object-cover max-h-64 md:max-h-72" />
+            <button id="removeImage" type="button" class="absolute top-0 right-0 bg-red-500 text-white p-1 h-[30px] w-[30px] rounded-[7px]">
+                ✕
+            </button>
+        </div>
+
     </div>
 
     <div>
         <div class="flex items-center justify-between">
             <div class="flex gap-4 text-gray-600">
                 <div>
-                    <input type="file" name="picture" id="picture" class="hidden" />
-                    <label for="picture"
-                        class="-m-2 flex gap-2 text-xs items-center rounded-full p-2 text-gray-600 hover:text-gray-800 cursor-pointer">
+                    <input type="file" name="picture" id="picture" class="hidden" accept="image/*" />
+                    <label for="picture" class="-m-2 flex gap-2 text-xs items-center rounded-full p-2 text-gray-600 hover:text-gray-800 cursor-pointer">
                         <span class="sr-only">Picture</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -42,3 +48,33 @@
         </div>
     </div>
 </form>
+
+@push('scripts')
+    <script>
+        document.getElementById('picture').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('imagePreview');
+            const previewContainer = document.getElementById('previewContainer');
+            const removeImage = document.getElementById('removeImage');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.classList.remove('hidden');  // Show the image preview container
+                }
+                reader.readAsDataURL(file);  // Read the file as a data URL
+            } else {
+                preview.src = '';
+                previewContainer.classList.add('hidden');  // Hide the preview if no image selected
+            }
+
+            // Remove image when the remove button is clicked
+            removeImage.addEventListener('click', function() {
+                preview.src = '';
+                previewContainer.classList.add('hidden');  // Hide the preview
+                document.getElementById('picture').value = '';  // Clear the file input
+            });
+        });
+    </script>
+@endpush

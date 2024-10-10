@@ -46,7 +46,7 @@
                                         class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
                                         tabindex="-1">
-                                        <a type="button" onclick="openModal('{{ $post->id }}', {{ json_encode($post->content) }})" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" role="menuitem" tabindex="-1" id="user-menu-item-0">
+                                        <a type="button" onclick="openModal('{{ $post->id }}', {{ json_encode($post->content) }}, '{{ $post->picture }}')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" role="menuitem" tabindex="-1" id="user-menu-item-0">
                                             Edit
                                         </a>
                                         <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
@@ -63,10 +63,12 @@
                     </div>
                 </header>
                 <a href="{{ route('posts.show', $post->id) }}">
-                    <div class="py-4 text-gray-700 font-normal">
-                        <p>
-                            {{ $post->content }}
-                        </p>
+                    <div class="py-4 text-gray-700 font-normal @if(isset($post->picture)) space-y-2 @endif">
+                        @if(isset($post->picture))
+                            <img src="{{ asset('storage/' . $post->picture) }}"
+                                class="min-h-auto w-full rounded-lg object-cover max-h-64 md:max-h-72" alt="" />
+                        @endif
+                        <p>{{ $post->content }}</p>
                     </div>
                 </a>
                 <div class="flex items-center gap-2 text-gray-500 text-xs my-2">

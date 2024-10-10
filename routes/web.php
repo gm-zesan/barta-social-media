@@ -23,4 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource('posts', PostController::class)->except(['create', 'edit']);
+    Route::get('/search', [HomeController::class, 'search'])->name('post.search');
+
 });
