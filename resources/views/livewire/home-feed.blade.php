@@ -1,8 +1,5 @@
 <div>
-    @include('partials.create-post')
-
-    <!-- Newsfeed -->
-    <section id="newsfeed" class="space-y-6">
+    <section id="newsfeed" class="space-y-6 mt-6">
         @foreach ($posts as $post)
             <article class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-5 sm:px-6">
                 <header>
@@ -102,5 +99,4 @@
         </div>
     @endif
 
-    @include('partials.edit-post-modal')
 </div>
