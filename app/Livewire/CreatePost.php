@@ -12,10 +12,8 @@ class CreatePost extends Component
     use WithFileUploads;
 
     public $user;
-    public $content = '';
+    public $content ='';
     public $picture;
-    public $success = false;
-    // #[Validate('required|min:5')]
     
 
     protected $rules = [
@@ -34,9 +32,9 @@ class CreatePost extends Component
             'picture' => $validate['picture'] ?? null,
             'user_id' => Auth::id(),
         ]);
-        $this->success = true;
-        $this->reset('content', 'picture');
+        $this->reset(['content', 'picture']);
         $this->content = '';
+
         session()->flash('success', 'Post created successfully');
         $this->dispatch('post-created', $post);
     }
